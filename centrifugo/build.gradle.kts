@@ -1,10 +1,13 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+
 plugins {
-    alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidLibrary)
+    kotlin("multiplatform")
+    id("com.android.library")
     id("module.publication")
 }
 
 kotlin {
+    @OptIn(ExperimentalKotlinGradlePluginApi::class)
     targetHierarchy.default()
     jvm()
     androidTarget {
@@ -28,7 +31,7 @@ kotlin {
         }
         val commonTest by getting {
             dependencies {
-                implementation(libs.kotlin.test)
+                implementation("org.jetbrains.kotlin:kotlin-test:${libs.versions.kotlin.get()}")
             }
         }
     }
